@@ -77,7 +77,7 @@
             background: url();
             padding: 10px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 35px rgba(23, 25, 20, 0.1);
             transition: transform 0.3s ease-in-out;
         }
 
@@ -189,45 +189,47 @@
 
         <!-- Item 2 -->
         <div class="item-container" onclick="addToBasket('Drone')">
-            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <img src="drone.jpg" alt="Drone">
             <p>Drone</p>
             <p>$700</p>
         </div>
 
-        <div class="item-container" onclick="addToBasket('Drone')">
-            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
-            <p>Drone</p>
-            <p>$700</p>
+          <!-- Item 3 -->
+        <div class="item-container" onclick="addToBasket('Bike')">
+            <img src="Bike.jpg" alt="Bike">
+            <p>Bike</p>
+            <p>$100</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('securitycamera')">
+            <img src="securitycamera.jpg" alt="securitycamera">
+            <p>Security camera</p>
+            <p>$50</p>
         </div>
 
         <div class="item-container" onclick="addToBasket('Drone')">
-            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
-            <p>Drone</p>
-            <p>$700</p>
+            <img src="smartwatch.jpg" alt="Drone">
+            <p>smart watch</p>
+            <p>$150</p>
         </div>
 
         <div class="item-container" onclick="addToBasket('Drone')">
-            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
-            <p>Drone</p>
-            <p>$700</p>
+            <img src="earbud.jpg" alt="Drone">
+            <p>Earbud</p>
+            <p style="color :rgb(255, 47, 47); background-color: yellow;">PROMOCAO</p>
+            <p>$30</p>
         </div>
 
         <div class="item-container" onclick="addToBasket('Drone')">
-            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
-            <p>Drone</p>
-            <p>$700</p>
+            <img src="LED.jpg" alt="Drone">
+            <p>MexLed strip light</p>
+            <p>$20</p>
         </div>
 
         <div class="item-container" onclick="addToBasket('Drone')">
-            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
-            <p>Drone</p>
-            <p>$700</p>
-        </div>
-
-        <div class="item-container" onclick="addToBasket('Drone')">
-            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
-            <p>Drone</p>
-            <p>$700</p>
+            <img src="ANELLED.jpg" alt="Drone">
+            <p>Anel Led</p>
+            <p>$100</p>
         </div>
 
         <div class="item-container" onclick="addToBasket('Drone')">
@@ -267,7 +269,6 @@
         <h3>SEU CARRINHO:</h3>
         <ul id="basketList"></ul>
         <p id="totalPrice">Total: R$<span id="total"></span></p>
-        <button onclick="payForItems()">PAGAR</button>
     </div>
 
   <!-- Inside the email-input div -->
@@ -281,7 +282,7 @@
     <label for="address">Endereço:</label><br>
     <input type="text" id="address" name="address" placeholder="Digite seu endereço">
 </div>
-
+<br><br>
     <div id="paymentForm">
         <h3>Detalhes do Pagamento</h3>
         <form id="paymentDetails">
@@ -308,22 +309,63 @@
                 displayTotalPrice();
             }
         }
-
+        function getPrice(selectedItem) {
+            const itemsWithPrices = {
+                Cellphone: 500,
+                Drone: 700,
+                Bike: 100, 
+                securitycamera: 50, // Add price for the Bike item
+                // Add prices for other items
+            };
+            return itemsWithPrices[selectedItem] || 0;
+        }
         function displayBasket() {
             const basketList = document.getElementById("basketList");
             basketList.innerHTML = "";
             basket.forEach((item, index) => {
                 const li = document.createElement("li");
-                li.textContent = item;
+
+                // Create image element
+                const img = document.createElement("img");
+                img.src = getImageSource(item);
+                img.alt = item;
+                img.style.width = "50px"; // Adjust image size as needed
+                img.style.height = "50px";
+
+                // Create item details
+                const itemDetails = document.createElement("div");
+                itemDetails.style.display = "inline-block";
+                itemDetails.style.marginLeft = "10px";
+                itemDetails.textContent = `${item} - $${getPrice(item).toFixed(2)}`;
+
+                // Create delete button
                 const deleteButton = document.createElement("span");
                 deleteButton.className = "delete";
                 deleteButton.textContent = "❌";
                 deleteButton.addEventListener("click", () => {
                     removeItem(index);
                 });
+
+                // Append elements to list item
+                li.appendChild(img);
+                li.appendChild(itemDetails);
                 li.appendChild(deleteButton);
                 basketList.appendChild(li);
             });
+        }
+
+
+        // Function to get image source based on item name
+        function getImageSource(item) {
+            // Replace this with the actual image sources for your items
+            const itemImages = {
+                Cellphone: "phone.jpg",
+                Drone: "drone.jpg",
+                Bike: "Bike.jpg",
+                
+                // Add image sources for other items
+            };
+            return itemImages[item] || "https://via.placeholder.com/50x50?text=No+Image";
         }
 
         function displayTotalPrice() {
