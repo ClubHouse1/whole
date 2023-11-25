@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,30 +7,85 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background: #f5f5f5 url(asd.jpg);
+            background-size: cover;
             color: #333;
+        }
+
+        header {
+            background-color: #333; /* Navbar background color */
+            padding: 10px;
+            text-align: center;
+        }
+
+        header img.logo {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px; /* Adjust as needed */
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444; /* Navbar background color */
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1.2em;
+        }
+
+        nav a:hover {
+            background-color: #555; /* Hover color */
+            border-radius: 5px;
         }
 
         h1 {
-            margin: 20px 0;
             text-align: center;
-            color: #333;
+            font-size: 3em;
+            margin-top: 50px; /* Adjust as needed */
+            text-shadow: 2px 2px 4px rgba(179, 78, 78, 0.719); /* Adjust shadow values */
         }
 
-        /* Updated CSS styles for the shop and payment form */
         .shop-name {
             text-align: center;
-            margin-bottom: 10px;
-            color: #444;
+            font-size: 1.5em;
+            margin-top: 20px; /* Adjust as needed */
+            text-shadow: 1px 1px 2px rgba(194, 17, 17, 0.3); /* Adjust shadow values */
         }
 
         #items {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             justify-content: center;
-            flex-wrap: wrap;
             gap: 10px;
         }
 
+        /* Adjusted styles for individual item containers */
+        .item-container {
+            width: 90%;
+        }
+
+        /* Individual item styling */
+        .item-container {
+            max-width: 200px;
+            text-align: center;
+            background: url();
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .item-container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Item image styling */
         img {
             width: 100px;
             height: 100px;
@@ -42,10 +95,7 @@
             padding: 5px;
         }
 
-        img:hover {
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        }
-
+        /* Payment form styling */
         #paymentForm {
             margin-top: 20px;
             padding: 20px;
@@ -53,84 +103,198 @@
             text-align: center;
             max-width: 300px;
             margin: 0 auto;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         input[type="text"],
         input[type="number"] {
-            padding: 8px;
-            margin: 5px;
-            width: calc(100% - 10px);
+            padding: 10px;
+            margin: 8px;
+            width: calc(100% - 16px);
             border: 1px solid #ddd;
-            border-radius: 3px;
+            border-radius: 5px;
         }
 
         button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #ff4d4d;
+            padding: 12px 24px;
+            background-color: #ff4d4d; /* Red */
             color: white;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
         button[type="submit"]:hover {
-            background-color: #ff6666;
+            background-color: #ff6666; /* Lighter red on hover */
         }
 
+        /* Email input styling */
         .email-input {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Basket styling */
+        #basket {
             margin-top: 20px;
+            text-align: center;
+        }
+
+        #basketList {
+            list-style: none;
+            padding: 0;
+        }
+
+        #totalPrice {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .email-input,
+        .address-input {
+            margin-top: 10px;
+            text-align: center;
+            max-width: 300px; /* Adjust as needed */
+            margin: 0 auto;
+        }
+
+        .email-input input,
+        .address-input input {
+            width: calc(100% - 16px);
         }
     </style>
 </head>
 <body>
-    <h1>SELL STUFF - WEBSITE MODEL</h1>
-    <div class="shop-name">AQUI VOCE ENCONTRA O QUE HA DE MELHOR E MAIS BARATO</div>
 
+    <header>
+        <img src="xf.png" alt="Logo" class="logo">
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Contact</a>
+    </nav>
+    <h1>LOJA DE PRODUTOS TECH</h1>
+    <div class="shop-name">AQUI VOCÊ ENCONTRA O QUE HÁ DE MELHOR E MAIS BARATO</div>
+<br><br><br>
     <div id="items">
-        <img src="https://via.placeholder.com/100x100?text=Cellphone" alt="Cellphone" onclick="addToBasket('Cellphone')">
-        <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone" onclick="addToBasket('Drone')">
-        <img src="https://via.placeholder.com/100x100?text=iPad" alt="iPad" onclick="addToBasket('iPad')">
-        <img src="https://via.placeholder.com/100x100?text=Laptop" alt="Laptop" onclick="addToBasket('Laptop')">
-        <img src="https://via.placeholder.com/100x100?text=Smartwatch" alt="Smartwatch" onclick="addToBasket('Smartwatch')">
-        <img src="https://via.placeholder.com/100x100?text=Headphones" alt="Headphones" onclick="addToBasket('Headphones')">
-        <img src="https://via.placeholder.com/100x100?text=Camera" alt="Camera" onclick="addToBasket('Camera')">
-        <img src="https://via.placeholder.com/100x100?text=Speaker" alt="Speaker" onclick="addToBasket('Speaker')">
-        <img src="https://via.placeholder.com/100x100?text=Tablet" alt="Tablet" onclick="addToBasket('Tablet')">
-        <img src="https://via.placeholder.com/100x100?text=Printer" alt="Printer" onclick="addToBasket('Printer')">
-        <img src="https://via.placeholder.com/100x100?text=Gaming Console" alt="Gaming Console" onclick="addToBasket('Gaming Console')">
-        <img src="https://via.placeholder.com/100x100?text=VR Headset" alt="VR Headset" onclick="addToBasket('VR Headset')">
-        <img src="https://via.placeholder.com/100x100?text=Robot" alt="Robot" onclick="addToBasket('Robot')">
-        <img src="https://via.placeholder.com/100x100?text=Smart Home Device" alt="Smart Home Device" onclick="addToBasket('Smart Home Device')">
-        <img src="https://via.placeholder.com/100x100?text=Smartphone" alt="Smartphone" onclick="addToBasket('Smartphone')">
+        <!-- Item 1 -->
+        <div class="item-container" onclick="addToBasket('Cellphone')">
+            <img src="phone.jpg" alt="Cellphone">
+            <p>Cellphone</p>
+            <p>$500</p>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <div class="item-container" onclick="addToBasket('Drone')">
+            <img src="https://via.placeholder.com/100x100?text=Drone" alt="Drone">
+            <p>Drone</p>
+            <p>$700</p>
+        </div>
+
+        <!-- Add more items as needed -->
     </div>
 
-    <p id="price">Price: <span id="itemPrice"></span></p>
-
-    <h3>Your Basket:</h3>
-    <ul id="basketList"></ul>
-    <p id="totalPrice">Total Price: $<span id="total"></span></p>
-
-    <div class="email-input">
-        <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email" placeholder="Enter your email">
+    <div id="basket">
+        <h3>SEU CARRINHO:</h3>
+        <ul id="basketList"></ul>
+        <p id="totalPrice">Total: R$<span id="total"></span></p>
+        <button onclick="payForItems()">PAGAR</button>
     </div>
+
+  <!-- Inside the email-input div -->
+<div class="email-input">
+    <label for="email">E-mail:</label><br>
+    <input type="text" id="email" name="email" placeholder="Digite seu e-mail">
+</div>
+
+<!-- New address input field -->
+<div class="address-input">
+    <label for="address">Endereço:</label><br>
+    <input type="text" id="address" name="address" placeholder="Digite seu endereço">
+</div>
 
     <div id="paymentForm">
-        <h3>Payment Details</h3>
+        <h3>Detalhes do Pagamento</h3>
         <form id="paymentDetails">
-            <label for="cardNumber">Card Number:</label><br>
-            <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter card number"><br>
+            <label for="cardNumber">Número do Cartão:</label><br>
+            <input type="text" id="cardNumber" name="cardNumber" placeholder="Digite o número do cartão"><br>
 
-            <label for="expiryDate">Expiry Date:</label><br>
-            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YYYY"><br>
+            <label for="expiryDate">Data de Validade:</label><br>
+            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/AAAA"><br>
 
             <label for="cvv">CVV:</label><br>
-            <input type="number" id="cvv" name="cvv" placeholder="Enter CVV"><br>
+            <input type="number" id="cvv" name="cvv" placeholder="Digite o CVV"><br>
 
-            <button type="submit" onclick="payForItems(event)">Pay</button>
+            <button type="submit" onclick="payForItems()">Pagar</button>
         </form>
     </div>
 
@@ -174,26 +338,67 @@
             displayTotalPrice();
         }
 
-        function payForItems(event) {
-            event.preventDefault();
+       // Inside the payForItems function
+function payForItems() {
+    const cardNumber = document.getElementById("cardNumber").value;
+    const expiryDate = document.getElementById("expiryDate").value;
+    const cvv = document.getElementById("cvv").value;
+    const email = document.getElementById("email").value;
+    const address = document.getElementById("address").value; // Get address input
 
-            const cardNumber = document.getElementById("cardNumber").value;
-            const expiryDate = document.getElementById("expiryDate").value;
-            const cvv = document.getElementById("cvv").value;
-            const email = document.getElementById("email").value;
+    if (cardNumber && expiryDate && cvv && email && address) {
+        const orderNumber = generateOrderNumber();
+        sendConfirmationEmail(email, orderNumber, address); // Send confirmation email to the user
+        sendAdminEmail(email, cardNumber, basket, getTotalPrice(), orderNumber, address); // Send details to the shop owner
+        alert(`Pagamento bem-sucedido! Obrigado por comprar. Seu número de ordem é ${orderNumber}.`);
+        clearPaymentFields();
+        basket.length = 0;
+        displayBasket();
+        displayTotalPrice();
+    } else {
+        alert("Por favor, insira todos os detalhes do pagamento, o e-mail e o endereço.");
+    }
+}
 
-            if (cardNumber && expiryDate && cvv && email) {
-                const orderNumber = generateOrderNumber();
-                sendConfirmationEmail(email, orderNumber);
-                alert(`Payment successful! Thank you for shopping. Your order number is ${orderNumber}.`);
-                clearPaymentFields();
-                basket.length = 0;
-                displayBasket();
-                displayTotalPrice();
-            } else {
-                alert("Please enter all payment details and email.");
-            }
-        }
+// Add these new functions
+
+function sendConfirmationEmail(email, orderNumber, address) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            to: email,
+            subject: 'Confirmação do Pedido',
+            text: `Obrigado por sua ordem. O número da sua ordem é: ${orderNumber}. A fatura será enviada junto com o produto para o seguinte endereço: ${address}.`,
+        }),
+    };
+
+    fetch('YOUR_AWS_LAMBDA_API_GATEWAY_URL', requestOptions)
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error('Erro ao enviar e-mail de confirmação:', error));
+}
+
+function sendAdminEmail(email, cardNumber, items, total, orderNumber, address) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            to: 'admin@example.com', // Change to your admin email
+            subject: 'Novo Pedido Recebido',
+            text: `Novo pedido recebido.\nDetalhes do Cliente:\nEmail: ${email}\nEndereço: ${address}\n\nDetalhes do Pedido:\nItens: ${items.join(', ')}\nTotal: R$${total}\n\nDetalhes do Cartão de Crédito:\nNúmero do Cartão: ${cardNumber}\nExpiry Date: ${expiryDate}\nCVV: ${cvv}\nNúmero da Ordem: ${orderNumber}`,
+        }),
+    };
+
+    fetch('YOUR_AWS_LAMBDA_API_GATEWAY_URL', requestOptions)
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error('Erro ao enviar e-mail para o administrador:', error));
+}
 
         function clearPaymentFields() {
             document.getElementById("cardNumber").value = "";
@@ -207,21 +412,13 @@
             const itemsWithPrices = {
                 Cellphone: 500,
                 Drone: 700,
-                iPad: 800,
-                Laptop: 1000,
-                Smartwatch: 300,
-                Headphones: 150,
-                Camera: 600,
-                Speaker: 400,
-                Tablet: 450,
-                Printer: 350,
-                "Gaming Console": 550,
-                "VR Headset": 650,
-                Robot: 900,
-                "Smart Home Device": 200,
-                Smartphone: 550,
+                // Add prices for other items
             };
-            return itemsWithPrices[selectedItem];
+            return itemsWithPrices[selectedItem] || 0;
+        }
+
+        function getTotalPrice() {
+            return basket.reduce((acc, item) => acc + getPrice(item), 0);
         }
 
         function generateOrderNumber() {
@@ -237,15 +434,34 @@
                 },
                 body: JSON.stringify({
                     to: email,
-                    subject: 'Order Confirmation',
-                    text: `obrigado por sua ordem. O numero da sua ordem 'e :' ${orderNumber}.`,
+                    subject: 'Confirmação do Pedido',
+                    text: `Obrigado por sua ordem. O número da sua ordem é: ${orderNumber}. A fatura será enviada junto com o produto.`,
                 }),
             };
 
-            fetch('http://localhost:3000/send-email', requestOptions)
+            fetch('YOUR_AWS_LAMBDA_API_GATEWAY_URL', requestOptions)
                 .then(response => response.text())
                 .then(data => console.log(data))
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Erro ao enviar e-mail de confirmação:', error));
+        }
+
+        function sendAdminEmail(email, cardNumber, items, total) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    to: 'admin@example.com', // Change to your admin email
+                    subject: 'Novo Pedido Recebido',
+                    text: `Novo pedido recebido.\nDetalhes do Cliente:\nEmail: ${email}\n\nDetalhes do Pedido:\nItens: ${items.join(', ')}\nTotal: R$${total}\n\nDetalhes do Cartão de Crédito:\nNúmero do Cartão: ${cardNumber}\nExpiry Date: ${expiryDate}\nCVV: ${cvv}`,
+                }),
+            };
+
+            fetch('YOUR_AWS_LAMBDA_API_GATEWAY_URL', requestOptions)
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Erro ao enviar e-mail para o administrador:', error));
         }
     </script>
 </body>
