@@ -207,26 +207,26 @@
             <p>$50</p>
         </div>
 
-        <div class="item-container" onclick="addToBasket('Drone')">
+        <div class="item-container" onclick="addToBasket('smartwatch')">
             <img src="smartwatch.jpg" alt="Drone">
             <p>smart watch</p>
             <p>$150</p>
         </div>
 
-        <div class="item-container" onclick="addToBasket('Drone')">
+        <div class="item-container" onclick="addToBasket('Earbud')">
             <img src="earbud.jpg" alt="Drone">
             <p>Earbud</p>
             <p style="color :rgb(255, 47, 47); background-color: yellow;">PROMOCAO</p>
             <p>$30</p>
         </div>
 
-        <div class="item-container" onclick="addToBasket('Drone')">
+        <div class="item-container" onclick="addToBasket('LED')">
             <img src="LED.jpg" alt="Drone">
             <p>MexLed strip light</p>
             <p>$20</p>
         </div>
 
-        <div class="item-container" onclick="addToBasket('Drone')">
+        <div class="item-container" onclick="addToBasket('AnelLed')">
             <img src="ANELLED.jpg" alt="Drone">
             <p>Anel Led</p>
             <p>$100</p>
@@ -300,86 +300,83 @@
     </div>
 
     <script>
-        const basket = [];
+         const basket = [];
 
-        function addToBasket(item) {
-            if (item) {
-                basket.push(item);
-                displayBasket();
-                displayTotalPrice();
-            }
-        }
-        function getPrice(selectedItem) {
-            const itemsWithPrices = {
-                Cellphone: 500,
-                Drone: 700,
-                Bike: 100, 
-                securitycamera: 50, // Add price for the Bike item
-                // Add prices for other items
-            };
-            return itemsWithPrices[selectedItem] || 0;
-        }
-        function displayBasket() {
-            const basketList = document.getElementById("basketList");
-            basketList.innerHTML = "";
-            basket.forEach((item, index) => {
-                const li = document.createElement("li");
+function addToBasket(item) {
+    if (item) {
+        const existingItem = basket.find(basketItem => basketItem.name === item);
 
-                // Create image element
-                const img = document.createElement("img");
-                img.src = getImageSource(item);
-                img.alt = item;
-                img.style.width = "50px"; // Adjust image size as needed
-                img.style.height = "50px";
-
-                // Create item details
-                const itemDetails = document.createElement("div");
-                itemDetails.style.display = "inline-block";
-                itemDetails.style.marginLeft = "10px";
-                itemDetails.textContent = `${item} - $${getPrice(item).toFixed(2)}`;
-
-                // Create delete button
-                const deleteButton = document.createElement("span");
-                deleteButton.className = "delete";
-                deleteButton.textContent = "❌";
-                deleteButton.addEventListener("click", () => {
-                    removeItem(index);
-                });
-
-                // Append elements to list item
-                li.appendChild(img);
-                li.appendChild(itemDetails);
-                li.appendChild(deleteButton);
-                basketList.appendChild(li);
-            });
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            basket.push({ name: item, quantity: 1 });
         }
 
+        displayBasket();
+        displayTotalPrice();
+    }
+}
 
-        // Function to get image source based on item name
-        function getImageSource(item) {
-            // Replace this with the actual image sources for your items
-            const itemImages = {
-                Cellphone: "phone.jpg",
-                Drone: "drone.jpg",
-                Bike: "Bike.jpg",
-                
-                // Add image sources for other items
-            };
-            return itemImages[item] || "https://via.placeholder.com/50x50?text=No+Image";
-        }
+function displayBasket() {
+    const basketList = document.getElementById("basketList");
+    basketList.innerHTML = "";
+    basket.forEach((item, index) => {
+        const li = document.createElement("li");
 
-        function displayTotalPrice() {
-            const totalPriceDisplay = document.getElementById("total");
-            const total = basket.reduce((acc, item) => acc + getPrice(item), 0);
-            totalPriceDisplay.textContent = total.toFixed(2);
-        }
+        const img = document.createElement("img");
+        img.src = getImageSource(item.name);
+        img.alt = item.name;
+        img.style.width = "50px";
+        img.style.height = "50px";
 
-        function removeItem(index) {
-            basket.splice(index, 1);
-            displayBasket();
-            displayTotalPrice();
-        }
+        const itemDetails = document.createElement("div");
+        itemDetails.style.display = "inline-block";
+        itemDetails.style.marginLeft = "10px";
+        itemDetails.textContent = `${item.name} - Quantity: ${item.quantity} - $${(getPrice(item.name) * item.quantity).toFixed(2)}`;
 
+        const deleteButton = document.createElement("span");
+        deleteButton.className = "delete";
+        deleteButton.textContent = "❌";
+        deleteButton.addEventListener("click", () => {
+            removeItem(index);
+        });
+
+        li.appendChild(img);
+        li.appendChild(itemDetails);
+        li.appendChild(deleteButton);
+        basketList.appendChild(li);
+    });
+}
+
+function getPrice(selectedItem) {
+    const itemsWithPrices = {
+        Cellphone: 500,
+        Drone: 700,
+        Bike: 100,
+        securitycamera: 50,
+        smartwatch: 150,
+        Earbud: 30,
+        LED: 20,
+        AnelLed: 100,
+    };
+    return itemsWithPrices[selectedItem] || 0;
+}
+
+function displayTotalPrice() {
+    const totalPriceDisplay = document.getElementById("total");
+    const total = basket.reduce((acc, item) => acc + getPrice(item.name) * item.quantity, 0);
+    totalPriceDisplay.textContent = total.toFixed(2);
+}
+
+function removeItem(index) {
+    if (basket[index].quantity > 1) {
+        basket[index].quantity--;
+    } else {
+        basket.splice(index, 1);
+    }
+    displayBasket();
+    displayTotalPrice();
+}
        // Inside the payForItems function
 function payForItems() {
     const cardNumber = document.getElementById("cardNumber").value;
@@ -453,7 +450,13 @@ function sendAdminEmail(email, cardNumber, items, total, orderNumber, address) {
             // Your item prices here
             const itemsWithPrices = {
                 Cellphone: 500,
-                Drone: 700,
+        Drone: 700,
+        Bike: 100,
+        securitycamera: 50,
+        smartwatch: 150,
+        Earbud: 30,
+        LED: 20,
+        AnelLed: 100,
                 // Add prices for other items
             };
             return itemsWithPrices[selectedItem] || 0;
@@ -504,6 +507,20 @@ function sendAdminEmail(email, cardNumber, items, total, orderNumber, address) {
                 .then(response => response.text())
                 .then(data => console.log(data))
                 .catch(error => console.error('Erro ao enviar e-mail para o administrador:', error));
+        }
+        function getImageSource(item) {
+            const itemImages = {
+                Cellphone: "phone.jpg",
+                Drone: "drone.jpg",
+                Bike: "Bike.jpg",
+                securitycamera: "securitycamera.jpg",
+                smartwatch: "smartwatch.jpg",
+                Earbud: "earbud.jpg",
+                LED: "LED.jpg",
+                AnelLed: "ANELLED.jpg",
+                // Add image sources for other items
+            };
+            return itemImages[item] || "https://via.placeholder.com/50x50?text=No+Image";
         }
     </script>
 </body>
